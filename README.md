@@ -60,7 +60,7 @@ public class MyApplication extends Application<MyConfiguration> {
 ```
 
 Metrics will be published with a prefix of
-`<metrics-prefix>.org.apache.common.metrics.MetricRegistry`
+`<metrics-prefix>.org.apache.kafka.common.metrics.MetricRegistry`
 where `metric-prefix` is the global prefix you've configured
 for your reporters.
 
