@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.simple</groupId>
+  <artifactId>kafka-dropwizard-reporter</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>kafka-dropwizard-reporter</name>
+  <url>https://github.com/SimpleFinance/kafka-dropwizard-reporter</url>
+  <description>Register built-in Kafka client metrics to Dropwizard Metrics</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <developers>
+      <developer>
+          <name>Jeff Klukas</name>
+          <email>jeff@klukas.net</email>
+          <timezone>-5</timezone>
+      </developer>
+      <developer>
+          <name>Simple</name>
+          <email>support@simple.com</email>
+          <timezone>-8</timezone>
+      </developer>
+  </developers>
+
+    <licenses>
+        <license>
+            <url>http://www.apache.org/licenses/</url>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>github</system>
+        <url>http://github.com/SimpleFinance/kafka-dropwizard-reporter/issues#issue/</url>
+    </issueManagement>
+
+    <dependencies>
+      <dependency>
+          <groupId>io.dropwizard</groupId>
+          <artifactId>dropwizard-metrics</artifactId>
+          <version>0.9.2</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.kafka</groupId>
+          <artifactId>kafka-clients</artifactId>
+          <version>0.9.0.1</version>
+          <scope>provided</scope>
+      </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
