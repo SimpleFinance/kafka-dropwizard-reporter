@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class DropwizardReporter implements MetricsReporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(DropwizardReporter.class);
+    private static final String METRIC_PREFIX = MetricsReporter.class.getPackage().getName();
 
     private MetricRegistry registry;
     private DropwizardReporterConfig config;
@@ -80,7 +81,7 @@ public class DropwizardReporter implements MetricsReporter {
         builder.setLength(builder.length() - 1);  // Remove the trailing dot.
         String processedName = builder.toString().replace(' ', '_').replace("\\.", "_");
 
-        return MetricRegistry.name(MetricsReporter.class, processedName);
+        return MetricRegistry.name(METRIC_PREFIX, processedName);
     }
 
 }

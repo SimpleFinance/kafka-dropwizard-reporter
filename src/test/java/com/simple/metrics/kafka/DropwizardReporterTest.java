@@ -23,7 +23,7 @@ public class DropwizardReporterTest {
         sensor.add(new MetricName("pack.bean1.avg", "grp1"), new Avg());
 
         Map<String, Gauge> gauges = SharedMetricRegistries.getOrCreate("default").getGauges();
-        String expectedName = "org.apache.kafka.common.metrics.MetricsReporter.grp1.pack.bean1.avg";
+        String expectedName = "org.apache.kafka.common.metrics.grp1.pack.bean1.avg";
         Assert.assertEquals(1, gauges.size());
         Assert.assertEquals(expectedName, gauges.keySet().toArray()[0]);
 

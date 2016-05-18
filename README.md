@@ -60,9 +60,9 @@ public class MyApplication extends Application<MyConfiguration> {
 ```
 
 Metrics will be published with a prefix of
-`<metrics-prefix>.org.apache.kafka.common.metrics.MetricRegistry`
-where `metric-prefix` is the global prefix you've configured
-for your reporters.
+`<metrics-prefix>.org.apache.kafka.common.metrics`
+where `metric-prefix` is the global prefix
+you've configured for a given reporter.
 
 ## Configuration (Optional)
 
@@ -79,8 +79,10 @@ metric.dropwizard.registry=kafka-metrics
 
 To build the project, you'll need to
 [install Apache Maven 3](https://maven.apache.org/install.html).
-If you're on Mac OS X, installation via [Homebrew](http://brew.sh/)
-is recommended (`brew install maven`).
+If you're on Mac OS X, you can install Maven via [Homebrew](http://brew.sh/):
+
+    $ brew install maven
+
 Once that's installed, run the following from main directory
 (where `pom.xml` lives):
 ```
