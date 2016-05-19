@@ -89,6 +89,20 @@ Once that's installed, run the following from main directory
 mvn clean install
 ```
 
+## Deploying
+
+To deploy to Maven Central, you'll need to provide GPG signatures for all
+the artifacts. There's a `sign` profile for this purpose:
+```
+mvn clean package -Psign
+
+# Check the artifacts look good, then deploy:
+mvn deploy
+```
+
+You'll need to have an account with Maven Central as part of the `com.simple`
+group. Contact the project maintainer for more info.
+
 ## Contributing
 
 Contributions, feature requests, and bug reports are all welcome.
