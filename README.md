@@ -1,4 +1,4 @@
-# kafka-dropwizard-reporter
+# kafka-dropwizard-reporter [![Build Status](https://travis-ci.org/SimpleFinance/kafka-dropwizard-reporter.svg?branch=master)](https://travis-ci.org/SimpleFinance/kafka-dropwizard-reporter)
 
 This package provides a `DropwizardReporter` class that connects the
 built-in metrics maintained by Kafka's client libraries with
