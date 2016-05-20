@@ -1,4 +1,23 @@
-# Example Dropwizard Application
+## Integration with Dropwizard Applications
+
+`DropwizardReporter` calls `SharedMetricRegistries.getOrCreate("default")`
+to discover a registry. To make sure `DropwizardReporter` instances report
+to the main metrics registry of a Dropwizard application, call
+the following in your `run` method before defining any Kafka clients
+([this will be done by default in Dropwizard 1.0+](https://github.com/dropwizard/dropwizard/pull/1513)):
+```java
+public class MyApplication extends Application<MyConfiguration> {
+// [...]
+    @Override
+    public void run(MyConfiguration configuration, environment: Environment) {
+        SharedMetricRegistries.add("default", environment.metrics());
+    // [...]
+    }
+}
+```
+
+
+## Running the Example
 
 This example application starts up a `KafkaProducer` and a `KafkaConsumer`
 inside an `ExecutorService` to demonstrate what metrics are produced.
@@ -18,6 +37,9 @@ mvn clean package
 # Start the server.
 java -jar target/kafka-dropwizard-reporter-example-1.0-SNAPSHOT.jar server conf.yml
 ```
+
+
+## Example Output
 
 While the application is running, you should be able to see the Kafka client
 metrics by hitting the `/metrics` endpoint on the admin port.

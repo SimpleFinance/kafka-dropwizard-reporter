@@ -40,29 +40,16 @@ metric.reporters=com.simple.metrics.kafka.DropwizardReporter
 
 That client will now automatically register all of its built-in
 metrics with a Dropwizard `MetricRegistry` when it's initialized.
+The registry is discovered by calling
+`SharedMetricRegistries.getOrCreate("default")`,
+so to direct `DropwizardReporter` to a particular registry, make
+sure to call `SharedMetricRegistries.add("default", myRegistry)`
+before instantiating Kafka clients if you want metrics to belong
+to `myRegistry`.
 
-## Integration with Dropwizard Applications
+For a full example of integrating Kafka client metrics in a Dropwizard
+application, see [example/](example/).
 
-The reporter calls `SharedMetricRegistries.getOrCreate("default")`
-to discover a registry. To make sure `DropwizardReporter` instances report
-to the main metrics registry of a Dropwizard application, call
-the following in your `run` method before defining any Kafka clients
-([this will be done by default in Dropwizard 1.0+](https://github.com/dropwizard/dropwizard/pull/1513)):
-```java
-public class MyApplication extends Application<MyConfiguration> {
-// [...]
-    @Override
-    public void run(MyConfiguration configuration, environment: Environment) {
-        SharedMetricRegistries.add("default", environment.metrics());
-    // [...]
-    }
-}
-```
-
-Metrics will be published with a prefix of
-`<metrics-prefix>.org.apache.kafka.common.metrics`
-where `metric-prefix` is the global prefix
-you've configured for a given reporter.
 
 ## Configuration (Optional)
 
