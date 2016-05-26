@@ -1,0 +1,21 @@
+metrics:
+  frequency: 5 seconds
+  reporters:
+    - type: csv
+      file: metrics/
+      
+producer:
+  bootstrap.servers: localhost:9092
+  client.id: my-producer-id
+  key.serializer: org.apache.kafka.common.serialization.StringSerializer
+  value.serializer: org.apache.kafka.common.serialization.StringSerializer
+  metric.reporters: com.simple.metrics.kafka.DropwizardReporter
+
+consumer:
+  bootstrap.servers: localhost:9092
+  client.id: my-consumer-id
+  group.id: example-group-id
+  enable.auto.commit: true
+  key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  metric.reporters: com.simple.metrics.kafka.DropwizardReporter
