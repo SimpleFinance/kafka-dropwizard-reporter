@@ -62,6 +62,11 @@ metric.reporters=com.simple.metrics.kafka.DropwizardReporter
 metric.dropwizard.registry=kafka-metrics
 ```
 
+Note that usage of this configuration option will trigger warning messages like
+`org.apache.kafka.clients.consumer.ConsumerConfig: The configuration metric.dropwizard.registry = kafka-metrics was supplied but isn't a known config.`
+due to a bug in Kafka's configuration machinery present until at least version 0.10.0.0.
+This is being addressed in [KAFKA-3711](https://issues.apache.org/jira/browse/KAFKA-3711).
+
 ## Building
 
 To build the project, you'll need to
