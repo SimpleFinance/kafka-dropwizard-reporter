@@ -85,15 +85,27 @@ mvn clean install
 
 To deploy to Maven Central, you'll need to provide GPG signatures for all
 the artifacts. There's a `sign` profile for this purpose:
-```
-mvn clean package -Psign
 
-# Check the artifacts look good, then deploy:
-mvn deploy
+    mvn clean verify -Psign
+
+Check that the output looks good. You should a jar, sources, javadoc, and pom,
+each with a signed `.asc` companion:
+``` bash
+$ ls target/kafka-*
+target/kafka-dropwizard-reporter-1.0.1-javadoc.jar      target/kafka-dropwizard-reporter-1.0.1.jar
+target/kafka-dropwizard-reporter-1.0.1-javadoc.jar.asc  target/kafka-dropwizard-reporter-1.0.1.jar.asc
+target/kafka-dropwizard-reporter-1.0.1-sources.jar      target/kafka-dropwizard-reporter-1.0.1.pom
+target/kafka-dropwizard-reporter-1.0.1-sources.jar.asc  target/kafka-dropwizard-reporter-1.0.1.pom.asc
 ```
+
+If the `target` directory looks good, deploy:
+
+    mvn deploy -Psign
 
 You'll need to have an account with Maven Central as part of the `com.simple`
 group. Contact the project maintainer for more info.
+The final step is to visit https://oss.sonatype.org/index.html#stagingRepositories
+and close the new staging repository (named something like `comsimple-XXXX`).
 
 ## Contributing
 
