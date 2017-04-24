@@ -41,18 +41,19 @@ public class DropwizardReporter implements MetricsReporter {
     public void metricChange(final KafkaMetric kafkaMetric) {
         LOGGER.debug("Processing a metric change for {}", kafkaMetric.metricName().toString());
         String name = dropwizardMetricName(kafkaMetric);
+
         Gauge<Double> gauge = new Gauge<Double>() {
             @Override
             public Double getValue() {
                 return kafkaMetric.value();
             }
         };
-        if (registry.getGauges().containsKey(name)) {
-            LOGGER.debug("{} was already registered, so first removing.", name);
-            registry.remove(name);
-        }
         LOGGER.debug("Registering {}", name);
-        registry.register(name, gauge);
+        try {
+            registry.register(name, gauge);
+        } catch (IllegalArgumentException e) {
+            LOGGER.warn("metricChange called for `{}' which was already registered, ignoring.", name);
+        }
     }
 
     @Override
@@ -65,7 +66,7 @@ public class DropwizardReporter implements MetricsReporter {
     @Override
     public void close() {}
 
-    private String dropwizardMetricName(KafkaMetric kafkaMetric) {
+    private static String dropwizardMetricName(KafkaMetric kafkaMetric) {
         MetricName name = kafkaMetric.metricName();
 
         List<String> nameParts = new ArrayList<String>(2);
