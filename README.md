@@ -104,8 +104,14 @@ If the `target` directory looks good, deploy:
 
 You'll need to have an account with Maven Central as part of the `com.simple`
 group. Contact the project maintainer for more info.
-The final step is to visit https://oss.sonatype.org/index.html#stagingRepositories
+Visit https://oss.sonatype.org/index.html#stagingRepositories
 and close the new staging repository (named something like `comsimple-XXXX`).
+Wait a few minutes, then select the repo again and "Release" it.
+If there is no "Release" button, something is wrong with your artifacts,
+or they haven't been closed out yet.
+
+Once released, it will take some time for Maven Central to sync and for the
+artifact to be available.
 
 ## Contributing
 
