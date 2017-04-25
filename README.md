@@ -25,7 +25,7 @@ First, declare a dependency on this package:
       <dependency>
           <groupId>com.simple</groupId>
           <artifactId>kafka-dropwizard-reporter</artifactId>
-          <version>1.0.0</version>
+          <version>1.0.2</version>
       </dependency>
 ```
 
@@ -118,6 +118,11 @@ artifact to be available.
 Contributions, feature requests, and bug reports are all welcome.
 Feel free to [submit an issue](issues/new)
 or submit a pull request to this repo.
+
+## Changelog
+
+Check the [releases](https://github.com/SimpleFinance/kafka-dropwizard-reporter/releases)
+page for summaries of what has changed in each release.
 
 ## Also See
 
