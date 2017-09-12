@@ -15,10 +15,10 @@ import java.util.Map;
 
 public class DropwizardReporter implements MetricsReporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(DropwizardReporter.class);
-    private static final String METRIC_PREFIX = MetricsReporter.class.getPackage().getName();
+    protected static final String METRIC_PREFIX = MetricsReporter.class.getPackage().getName();
 
-    private MetricRegistry registry;
-    private DropwizardReporterConfig config;
+    protected MetricRegistry registry;
+    protected DropwizardReporterConfig config;
 
     @Override
     public void configure(Map<String, ?> configs) {
