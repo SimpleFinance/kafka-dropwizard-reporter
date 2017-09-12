@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 public class DropwizardReporter implements MetricsReporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(DropwizardReporter.class);
@@ -19,6 +21,7 @@ public class DropwizardReporter implements MetricsReporter {
 
     protected MetricRegistry registry;
     protected DropwizardReporterConfig config;
+    private Set<String> metricNames = new HashSet<>();
 
     @Override
     public void configure(Map<String, ?> configs) {
@@ -51,6 +54,7 @@ public class DropwizardReporter implements MetricsReporter {
         LOGGER.debug("Registering {}", name);
         try {
             registry.register(name, gauge);
+            metricNames.add(name);
         } catch (IllegalArgumentException e) {
             LOGGER.warn("metricChange called for `{}' which was already registered, ignoring.", name);
         }
@@ -61,10 +65,14 @@ public class DropwizardReporter implements MetricsReporter {
         String name = dropwizardMetricName(kafkaMetric);
         LOGGER.debug("Removing {}", name);
         registry.remove(name);
+        metricNames.remove(name);
     }
 
     @Override
-    public void close() {}
+    public void close() {
+        for (String name: metricNames)
+            registry.remove(name);
+    }
 
     private static String dropwizardMetricName(KafkaMetric kafkaMetric) {
         MetricName name = kafkaMetric.metricName();
