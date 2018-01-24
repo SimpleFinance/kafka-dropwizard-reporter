@@ -15,7 +15,7 @@ producer, and streams metrics to those same outputs.
 
 `dropwizard-metrics` 3.0 and above.
 
-`kafka-clients` 0.8.1 and above, including 0.9 and 0.10.
+`kafka-clients` 0.8.1 and above, including 0.9, 0.10, 0.11, and 1.0.
 Also functions with Kafka Streams and Kafka Connect.
 
 
@@ -27,7 +27,7 @@ of the dependencies that you want:
       <dependency>
           <groupId>com.simple</groupId>
           <artifactId>kafka-dropwizard-reporter</artifactId>
-          <version>1.1.0</version>
+          <version>1.1.1</version>
       </dependency>
 
       <!-- Required; you must provide metrics-core and kafka-clients;
@@ -150,10 +150,10 @@ Check that the output looks good. You should a jar, sources, javadoc, and pom,
 each with a signed `.asc` companion:
 ``` bash
 $ ls target/kafka-*
-target/kafka-dropwizard-reporter-1.0.1-javadoc.jar      target/kafka-dropwizard-reporter-1.0.1.jar
-target/kafka-dropwizard-reporter-1.0.1-javadoc.jar.asc  target/kafka-dropwizard-reporter-1.0.1.jar.asc
-target/kafka-dropwizard-reporter-1.0.1-sources.jar      target/kafka-dropwizard-reporter-1.0.1.pom
-target/kafka-dropwizard-reporter-1.0.1-sources.jar.asc  target/kafka-dropwizard-reporter-1.0.1.pom.asc
+target/kafka-dropwizard-reporter-1.1.1-javadoc.jar      target/kafka-dropwizard-reporter-1.1.1.jar
+target/kafka-dropwizard-reporter-1.1.1-javadoc.jar.asc  target/kafka-dropwizard-reporter-1.1.1.jar.asc
+target/kafka-dropwizard-reporter-1.1.1-sources.jar      target/kafka-dropwizard-reporter-1.1.1.pom
+target/kafka-dropwizard-reporter-1.1.1-sources.jar.asc  target/kafka-dropwizard-reporter-1.1.1.pom.asc
 ```
 
 If the `target` directory looks good, deploy:
