@@ -56,7 +56,7 @@ public class DropwizardReporter implements MetricsReporter {
             registry.register(name, gauge);
             metricNames.add(name);
         } catch (IllegalArgumentException e) {
-            LOGGER.warn("metricChange called for `{}' which was already registered, ignoring.", name);
+            LOGGER.debug("metricChange called for `{}' which was already registered, ignoring.", name);
         }
     }
 
