@@ -13,8 +13,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <dropwizard.metrics.version>4.1.12.1</dropwizard.metrics.version>
     </properties>
 
     <developers>
@@ -79,7 +80,7 @@
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
-            <version>3.1.2</version>
+            <version>${dropwizard.metrics.version}</version>
         </dependency>
 
         <!-- Optional; the user is expected to specify this dependency
@@ -87,7 +88,7 @@
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-graphite</artifactId>
-            <version>3.1.2</version>
+            <version>${dropwizard.metrics.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -96,7 +97,7 @@
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
-            <version>0.9.0.1</version>
+            <version>3.2.1</version>
             <scope>provided</scope>
         </dependency>
 
