@@ -21,7 +21,7 @@ public class DropwizardReporter implements MetricsReporter {
 
     protected MetricRegistry registry;
     protected DropwizardReporterConfig config;
-    private Set<String> metricNames = new HashSet<>();
+    private final Set<String> metricNames = new HashSet<>();
 
     @Override
     public void configure(Map<String, ?> configs) {
@@ -45,10 +45,12 @@ public class DropwizardReporter implements MetricsReporter {
         LOGGER.debug("Processing a metric change for {}", kafkaMetric.metricName().toString());
         String name = dropwizardMetricName(kafkaMetric);
 
-        Gauge<Double> gauge = new Gauge<Double>() {
-            @Override
-            public Double getValue() {
-                return kafkaMetric.value();
+        Gauge<Double> gauge = () -> {
+            if (kafkaMetric.metricValue() instanceof Number) {
+                return ((Number) kafkaMetric.metricValue()).doubleValue();
+            } else {
+                // Null values are not reported by GraphiteReporter
+                return null;
             }
         };
         LOGGER.debug("Registering {}", name);
@@ -70,25 +72,21 @@ public class DropwizardReporter implements MetricsReporter {
 
     @Override
     public void close() {
-        for (String name: metricNames)
+        for (String name : metricNames)
             registry.remove(name);
     }
 
     private static String dropwizardMetricName(KafkaMetric kafkaMetric) {
         MetricName name = kafkaMetric.metricName();
 
-        List<String> nameParts = new ArrayList<String>(2);
+        List<String> nameParts = new ArrayList<>(2);
         nameParts.add(name.group());
         nameParts.addAll(name.tags().values());
         nameParts.add(name.name());
 
-        StringBuilder builder = new StringBuilder();
-        for (String namePart : nameParts) {
-            builder.append(namePart);
-            builder.append(".");
-        }
-        builder.setLength(builder.length() - 1);  // Remove the trailing dot.
-        String processedName = builder.toString().replace(' ', '_').replace("\\.", "_");
+        String processedName = String.join(".", nameParts)
+                .replace(' ', '_')
+                .replace("\\.", "_");
 
         return MetricRegistry.name(METRIC_PREFIX, processedName);
     }
